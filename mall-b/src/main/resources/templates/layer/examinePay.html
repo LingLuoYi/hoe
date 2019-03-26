@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="//layui.hcwl520.com.cn/layui-v2.4.5/css/layui.css?v=201811010202" media="all">
+</head>
+<body>
+<div class="form">
+    <form class="layui-form layui-form-pane" action="">
+        <input type="text" value="" id="id" name="id" style="display: none">
+        <div class="layui-form-item">
+            <label class="layui-form-label">商品名称</label>
+            <div class="layui-input-block">
+               <label class="label" id="payCommodityName">商品名称</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">支付ID</label>
+            <div class="layui-input-block">
+                <label class="label" id="payId">支付ID</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">商品ID</label>
+            <div class="layui-input-block">
+                 <label class="label" id="payCommodityId">商品ID</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">商品数量</label>
+            <div class="layui-input-block">
+                 <label class="label" id="payNum">商品数量</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">订单金额</label>
+            <div class="layui-input-block">
+                 <label class="label" id="payCommodityMoney">订单金额</label>   ≈   <label class="label" id="BTC">0 BTC</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">支付方式</label>
+            <div class="layui-input-block">
+                 <label class="label" id="payMode">支付方式</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">支付人ID</label>
+            <div class="layui-input-block">
+                <label class="label" id="payUserId">支付人ID</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <img id="img" onmouseout="smaller()" onmouseover="bigger()" src="" style="width: 400px; height: 300px;">
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">实际收到的钱</label>
+            <div class="layui-input-block">
+                <input type="text" name="payReceipts" autocomplete="off" placeholder="请输入" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">转账ID</label>
+            <div class="layui-input-block">
+                <input type="text" name="payTypeId" autocomplete="off" placeholder="请输入" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">拒绝备注</label>
+            <div class="layui-input-block">
+                <input type="text" name="s" autocomplete="off" placeholder="请输入" class="layui-input">
+            </div>
+        </div>
+        <div>
+            <button class="layui-btn" lay-submit lay-filter="formDemo">通过</button>
+            <button class="layui-btn" lay-submit lay-filter="formDemo2">拒绝</button>
+        </div>
+    </form>
+</div>
+
+
+
+<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="//layui.hcwl520.com.cn/layui-v2.4.5/layui.js?v=201811010202"></script>
+<script>
+    layui.use('form',function () {
+        var from = layui.form ;
+
+        from.on('submit(formDemo)',function (res) {
+            console.log(res.field);
+            $.ajax({
+                url: '/assets/examine_finance',
+                type: 'post',
+                dataType: 'json',
+                data: 'id='+res.field.id+'&o=0&payReceipts='+res.field.payReceipts+'&payTypeId='+res.field.payTypeId,
+                success: function (res) {
+                    if (res.state === 0){
+                        layer.msg(res.msg);
+                        var index = parent.layer.getFrameIndex(window.name);
+                        window.parent.location.reload();
+                        setTimeout(function(){parent.layer.close(index)}, 500);
+                    } else {
+                        layer.msg(res.msg);
+                    }
+                },
+                error: function (res) {
+                    alert(res)
+                }
+            });
+            return false;
+        });
+
+        from.on('submit(formDemo2)',function (res) {
+            console.log(res.field);
+            $.ajax({
+                url: '/assets/examine_finance',
+                type: 'post',
+                dataType: 'json',
+                data: 'id='+res.field.id+'&o=1&s='+res.field.s,
+                success: function (res) {
+                    console.log(res.data);
+                    if (res.state === 0){
+                        layer.msg(res.msg);
+                        var index = parent.layer.getFrameIndex(window.name);
+                        window.parent.location.reload();
+                        setTimeout(function(){parent.layer.close(index)}, 500);
+                    } else {
+                        layer.msg(res.msg);
+                    }
+                },
+                error: function (res) {
+                    alert(res)
+                }
+            });
+            return false;
+        });
+    });
+    var img = document.getElementById('img');
+    function bigger() {
+        img.style.width='800px';
+        img.style.height='700px';
+    }
+    function smaller() {
+        img.style.width='400px';
+        img.style.height='300px';
+    }
+
+    function child(obj) {
+        $("#id").val(obj.payId);
+        $("#payCommodityName").text(obj.payCommodityName);
+        $("#payId").text(obj.payId);
+        $("#payCommodityId").text(obj.payCommodityId);
+        $("#payNum").text(obj.payNum);
+        $("#payCommodityMoney").text(obj.payCommodityMoney);
+        $("#payMode").text(obj.payMode);
+        $("#payUserId").text(obj.payUserId);
+        $("#img").attr('src',obj.voucherUrl);
+
+        $.ajax({
+            url: '/hoe/transformation?type=0&num='+obj.payCommodityMoney,
+            type: 'POST',
+            dataType: 'json',
+            success: function (res) {
+                if (res.state === 0){
+                    $("#BTC").text(res.data+' BTC')
+                }
+            },
+            error: function (res) {
+                alert(res);
+            }
+        })
+    }
+
+</script>
+</body>
+<style type="text/css">
+    .form{
+        text-align: center;
+    }
+</style>
+</html>

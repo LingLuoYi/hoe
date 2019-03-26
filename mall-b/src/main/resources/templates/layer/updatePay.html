@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>支付审核弹出层+支付管理</title>
+    <link rel="stylesheet" href="//layui.hcwl520.com.cn/layui-v2.4.5/css/layui.css?v=201811010202" media="all">
+</head>
+<body>
+
+<form class="layui-form" action="">
+    <input type="text" id="id" value="" name="id" style="display: none">
+    <div class="layui-form-item">
+        <label class="layui-form-label">支付订单ID</label>
+        <div class="layui-input-block">
+            <input type="text" id="payId" name="payId" lay-verify="required" placeholder="请输入" autocomplete="off" disabled class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">订单ID</label>
+        <div class="layui-input-block">
+            <input type="text" id="payOrderId" name="payOrderId" lay-verify="required" placeholder="请输入" autocomplete="off" disabled class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品ID</label>
+        <div class="layui-input-block">
+            <input type="text" id="payCommodityId" name="payCommodityId" lay-verify="required" placeholder="请输入" autocomplete="off" disabled class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">支付标题</label>
+        <div class="layui-input-block">
+            <input type="text" id="payTitle" name="payTitle" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品名称</label>
+        <div class="layui-input-block">
+            <input type="text" id="payCommodityName" name="payCommodityName" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品单价</label>
+        <div class="layui-input-block">
+            <input type="text" id="payCommodityUnitPrice" name="payCommodityUnitPrice" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品数量</label>
+        <div class="layui-input-block">
+            <input type="text" id="payNum" name="payNum" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">订单金额</label>
+        <div class="layui-input-block">
+            <input type="text" id="payCommodityMoney" name="payCommodityMoney" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">支付方式</label>
+        <div class="layui-input-block">
+            <input type="text" id="payMode" name="payMode" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">支付方式手续费</label>
+        <div class="layui-input-block">
+            <input type="text" id="PayTypeRate" name="PayTypeRate" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">优惠金额</label>
+        <div class="layui-input-block">
+            <input type="text" id="PayCouponMoney" name="PayCouponMoney" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">实收款</label>
+        <div class="layui-input-block">
+            <input type="text" id="payReceipts" name="payReceipts" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">第三方支付ID</label>
+        <div class="layui-input-block">
+            <input type="text" id="PayTypeId" name="PayTypeId" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">支付人ID</label>
+        <div class="layui-input-block">
+            <input type="text" id="payUserId" name="payUserId" lay-verify="required" placeholder="请输入" autocomplete="off" disabled class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">支付人姓名</label>
+        <div class="layui-input-block">
+            <input type="text" id="payName" name="payName" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">支付人手机号</label>
+        <div class="layui-input-block">
+            <input type="text" id="payPhone" name="payPhone" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">支付人邮箱</label>
+        <div class="layui-input-block">
+            <input type="text" id="payEmail" name="payEmail" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">订单状态</label>
+        <div class="layui-input-block">
+            <input type="text" id="payState" name="payState" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">付款凭证状态</label>
+        <div class="layui-input-block">
+            <input type="text" id="voucherState" name="voucherState" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">凭证url</label>
+        <div class="layui-input-block">
+            <input type="text" id="voucherUrl" name="voucherUrl" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">支付订单生成时间</label>
+        <div class="layui-input-block">
+            <input type="text" id="payTime" name="payTime" lay-verify="required" placeholder="请输入" autocomplete="off" disabled class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">审核者ID</label>
+        <div class="layui-input-block">
+            <input type="text" id="userId" name="userId" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">审核时间</label>
+        <div class="layui-input-block">
+            <input type="text" id="examineTime" name="examineTime" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">修改</button>
+        </div>
+    </div>
+</form>
+
+<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="//layui.hcwl520.com.cn/layui-v2.4.5/layui.js?v=201811010202"></script>
+<script>
+    layui.use('form',function () {
+        var from = layui.form ;
+
+        from.on('submit(formDemo)',function (res) {
+            console.log(res.field);
+            $.ajax({
+               url: '/pay/pay_update',
+               type: 'post',
+               dataType: 'json',
+               data: res.field,
+               success: function (res) {
+                   console.log(res.msg);
+                   if (res.state === 0){
+                       layer.msg(res.msg);
+                       var index = parent.layer.getFrameIndex(window.name);
+                       window.parent.location.reload();
+                       setTimeout(function(){parent.layer.close(index)}, 500);
+                   } else {
+                       layer.msg(res.msg);
+                   }
+               },
+                error: function (res) {
+                    alert(res)
+                }
+            });
+            return false;
+        })
+    });
+
+    function child(obj){
+        console.log(obj);
+        $("#id").val(obj.id);
+        $("#payId").val(obj.payId);
+        $("#payOrderId").val(obj.payOrderId);
+        $("#payCommodityId").val(obj.payCommodityId);
+        $("#payTitle").val(obj.payTitle);
+        $("#payCommodityName").val(obj.payCommodityName);
+        $("#payCommodityUnitPrice").val(obj.payCommodityUnitPrice);
+        $("#payCommodityMoney").val(obj.payCommodityMoney);
+        $("#payNum").val(obj.payNum);
+        $("#payMode").val(obj.payMode);
+        $("#PayTypeRate").val(obj.PayTypeRate);
+        $("#PayCouponMoney").val(obj.PayCouponMoney);
+        $("#payReceipts").val(obj.payReceipts);
+        $("#PayTypeId").val(obj.PayTypeId);
+        $("#payUserId").val(obj.payUserId);
+        $("#payName").val(obj.payName);
+        $("#payPhone").val(obj.payPhone);
+        $("#payEmail").val(obj.payEmail);
+        $("#payState").val(obj.payState);
+        $("#voucherState").val(obj.voucherState);
+        $("#voucherUrl").val(obj.voucherUrl);
+        $("#payTime").val(obj.payTime);
+        $("#userId").val(obj.userId);
+        $("#examineTime").val(obj.examineTime);
+    }
+</script>
+</body>
+</html>

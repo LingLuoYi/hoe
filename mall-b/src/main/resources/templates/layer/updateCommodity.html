@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品管理</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+</head>
+<body>
+
+<form class="layui-form layui-form-pane" action="">
+    <input type="text" id="id" value="" name="id" style="display: none">
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品名称</label>
+        <div class="layui-input-block">
+            <input type="text" id="commodityName" name="commodityName" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品编号</label>
+        <div class="layui-input-block">
+            <input type="text" id="commodityId" name="commodityId" lay-verify="required" placeholder="请输入" autocomplete="off" disabled class="layui-input layui-disabled" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品国家</label>
+        <div class="layui-input-block">
+            <input type="text" id="commodityCountry" name="commodityCountry" lay-verify="required" placeholder="请输入" autocomplete="off" disabled class="layui-input layui-disabled" value="ZH">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品现库存</label>
+        <div class="layui-input-block">
+            <input type="text" id="commodityStock" name="commodityStock" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品总库存</label>
+        <div class="layui-input-block">
+            <input type="text" id="commodityInitialStock" name="commodityInitialStock" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">购买下限</label>
+        <div class="layui-input-block">
+            <input type="text" id="commodityPresent" name="commodityPresent" lay-verify="required" placeholder="0不限制" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">购买上限</label>
+        <div class="layui-input-block">
+            <input type="text" id="commodityTopLimit" name="commodityTopLimit" lay-verify="required" placeholder="0不限制" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">购买次数</label>
+        <div class="layui-input-block">
+            <input type="text" id="commodityLimit" name="commodityLimit" lay-verify="required" placeholder="0不限制" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品单价</label>
+        <div class="layui-input-block">
+            <input type="text" id="commodityMoney" name="commodityMoney" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品类型</label>
+        <div class="layui-input-block">
+            <input type="text" id="commodityType" name="commodityType" lay-verify="required" placeholder="1或者BTC" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品单位瓦</label>
+        <div class="layui-input-block">
+            <input type="text" id="commodityWatt" name="commodityWatt" lay-verify="required" placeholder="算力商品填写" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品单位电费</label>
+        <div class="layui-input-block">
+            <input type="text" id="commodityPowerRate" name="commodityPowerRate" lay-verify="required" placeholder="算力商品填写" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">固化收益</label>
+        <div class="layui-input-block">
+            <input type="text" id="commodityCuring" name="commodityCuring"  placeholder="固化套餐填写，正常套餐填-1" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品交割时间</label>
+        <div class="layui-input-block">
+            <input type="text" id="commodityTime" name="commodityTime" lay-verify="required" placeholder="实物商品是发货时间、算力商品是交割时间" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品期限</label>
+        <div class="layui-input-block">
+            <input type="text" id="commodityTerm" name="commodityTerm" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品描述</label>
+        <div class="layui-input-block">
+            <input type="text" id="commodityDescribe" name="commodityDescribe" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">状态</label>
+        <div class="layui-input-block">
+            <select id="commodityState" name="commodityState" lay-filter="aihao">
+                <option value="0">上架</option>
+                <option value="1">预热</option>
+                <option value="2">下架</option>
+                <option value="3">删除</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="/layui/layui.all.js"></script>
+<script>
+    function child(obj){
+        $("#id").val(obj.id);
+        $("#commodityName").val(obj.commodityName);
+        $("#commodityId").val(obj.commodityId);
+        $("#commodityStock").val(obj.commodityStock);
+        $("#commodityInitialStock").val(obj.commodityInitialStock);
+        $("#commodityPresent").val(obj.commodityPresent);
+        $("#commodityTopLimit").val(obj.commodityTopLimit);
+        $("#commodityLimit").val(obj.commodityLimit);
+        $("#commodityMoney").val(obj.commodityMoney);
+        $("#commodityType").val(obj.commodityType);
+        $("#commodityWatt").val(obj.commodityWatt);
+        $("#commodityPowerRate").val(obj.commodityPowerRate);
+        $("#commodityCuring").val(obj.commodityCuring);
+        $("#commodityTime").val(obj.commodityTime);
+        $("#commodityTerm").val(obj.commodityTerm);
+        $("#commodityDescribe").val(obj.commodityDescribe);
+        $("#commodityState").val(obj.commodityState)
+    }
+    layui.use('form',function () {
+       var form = layui.form ;
+
+       form.on('submit(formDemo)',function(res){
+           $.ajax({
+               url: '/commodity/commodity_update',
+               type: 'post',
+               dataType: 'json',
+               data: res.field,
+               success: function (res) {
+                   if (res.state === 0){
+                       layer.msg(res.msg);
+                       if (res.state === 0){
+                           layer.msg(res.msg);
+                           var index = parent.layer.getFrameIndex(window.name);
+                           window.parent.location.reload();
+                           setTimeout(function(){parent.layer.close(index)}, 500);
+                       } else {
+                           layer.msg(res.msg);
+                       }
+                   } else {
+                       layer.msg(res.msg)
+                   }
+               },
+               error: function (res) {
+                   alert(res);
+               }
+           });
+           return false;
+       });
+
+        form.render();
+
+    });
+</script>
+</body>
+</html>

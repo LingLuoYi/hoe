@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="//layui.hcwl520.com.cn/layui-v2.4.5/css/layui.css?v=201811010202" media="all">
+</head>
+<body>
+<div class="form">
+    <form class="layui-form layui-form-pane" action="">
+        <input type="text" value="" id="id" name="id" style="display: none">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户ID</label>
+            <div class="layui-input-block">
+                <label class="label" id="userId">用户ID</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">资产ID</label>
+            <div class="layui-input-block">
+                <label class="label" id="assetsId">资产ID</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">提现人名</label>
+            <div class="layui-input-block">
+               <label class="label" id="name">提现人名</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">手机号码</label>
+            <div class="layui-input-block">
+                <label class="label" id="phone">手机号码</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">身份证号码</label>
+            <div class="layui-input-block">
+                <label class="label" id="idcard">身份证号码</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">提现类型</label>
+            <div class="layui-input-block">
+                <label class="label" id="assetsType">提现类型</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">提现数量</label>
+            <div class="layui-input-block">
+                <label class="label" id="num">提现数量</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">申请时间</label>
+            <div class="layui-input-block">
+                <label class="label" id="submitTime">申请时间</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block">
+                <label class="label" id="remarks">备注</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block">
+                <input type="text" name="remarks" autocomplete="off" placeholder="给用户看的👀" class="layui-input">
+            </div>
+        </div>
+        <div>
+            <button class="layui-btn" lay-submit lay-filter="formDemo">通过</button>
+            <button class="layui-btn" lay-submit lay-filter="formDemo2">拒绝</button>
+        </div>
+    </form>
+</div>
+
+
+
+<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="//layui.hcwl520.com.cn/layui-v2.4.5/layui.js?v=201811010202"></script>
+<script>
+    layui.use('form',function () {
+        var from = layui.form ;
+
+        from.on('submit(formDemo)',function (res) {
+            console.log(res.field);
+            $.ajax({
+                url: '/reflect/reflect_examine',
+                type: 'post',
+                dataType: 'json',
+                data: 'id='+res.field.id+'&o=0&remarks='+res.field.remarks,
+                success: function (res) {
+                    if (res.state === 0){
+                        layer.msg(res.msg);
+                        var index = parent.layer.getFrameIndex(window.name);
+                        window.parent.location.reload();
+                        setTimeout(function(){parent.layer.close(index)}, 500);
+                    } else {
+                        layer.msg(res.msg);
+                    }
+                },
+                error: function (res) {
+                    alert(res);
+                }
+            });
+            return false;
+        });
+        from.on('submit(formDemo2)',function (res) {
+            console.log(res);
+            $.ajax({
+                url: '/reflect/reflect_examine',
+                type: 'post',
+                dataType: 'json',
+                data: 'id='+res.field.id+'&o=1&remarks='+res.field.remarks,
+                success: function (res) {
+                    console.log(res.data);
+                    if (res.state === 0){
+                        layer.msg(res.msg);
+                        var index = parent.layer.getFrameIndex(window.name);
+                        window.parent.location.reload();
+                        setTimeout(function(){parent.layer.close(index)}, 500);
+                    } else {
+                        layer.msg(res.msg);
+                    }
+                },
+                error: function (res) {
+                    alert(res);
+                }
+            });
+            return false;
+        });
+    });
+    function child(obj) {
+        $("#id").val(obj.id);
+        $("#userId").text(obj.userId);
+        $("#assetsId").text(obj.assetsId);
+        $("#name").text(obj.name);
+        $("#phone").text(obj.phone);
+        $("#idcard").text(obj.idcard);
+        $("#assetsType").text(obj.assetsType);
+        $("#num").text(obj.num);
+        $("#submitTime").text(obj.submitTime);
+        $("#remarks").text(obj.remarks);
+    }
+</script>
+</body>
+<style type="text/css">
+    .form{
+        text-align: center;
+    }
+</style>
+</html>

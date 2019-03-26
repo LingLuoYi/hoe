@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="//layui.hcwl520.com.cn/layui-v2.4.5/css/layui.css?v=201811010202" media="all">
+</head>
+<body>
+<div class="form">
+    <form class="layui-form layui-form-pane" action="">
+        <input type="text" value="" id="id" name="id" style="display: none">
+        <div class="layui-form-item">
+            <img id="imgeer1" onmouseout="smaller1()" onmouseover="bigger1()" src="" style="width: 300px; height: 200px;">
+            <img id="imger2" onmouseout="smaller2()" onmouseover="bigger2()" src="" style="width: 300px; height: 200px;">
+        </div>
+        <div class="layui-form-item">
+            <img id="img" onmouseout="smaller()" onmouseover="bigger()" src="" style="width: 300px; height: 200px;">
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户ID</label>
+            <div class="layui-input-block">
+                 <label class="label" id="userId">用户ID</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户姓名</label>
+            <div class="layui-input-block">
+                <label class="label" id="name">用户姓名</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">电话号码</label>
+            <div class="layui-input-block">
+                <label class="label" id="phone">电话号码</label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">身份证号码</label>
+            <div class="layui-input-block">
+                <label class="label" id="IDCardNo">身份证号码</label>
+            </div>
+        </div>
+        <div>
+            <button class="layui-btn" lay-submit lay-filter="formDemo">通过</button>
+            <button class="layui-btn" lay-submit lay-filter="formDemo2">拒绝</button>
+        </div>
+    </form>
+</div>
+<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="//layui.hcwl520.com.cn/layui-v2.4.5/layui.js?v=201811010202"></script>
+<script>
+    layui.use('form',function () {
+        var from = layui.form ;
+
+        from.on('submit(formDemo)',function (res) {
+            console.log(res.field);
+            $.ajax({
+                url: '/user/card_s',
+                type: 'post',
+                dataType: 'json',
+                data: 'userId='+res.field.id+'&o=0',
+                success: function (res) {
+                    layer.msg(res.msg);
+                    if (res.state === 0){
+                        layer.msg(res.msg);
+                        var index = parent.layer.getFrameIndex(window.name);
+                        window.parent.location.reload();
+                        setTimeout(function(){parent.layer.close(index)}, 500);
+                    } else {
+                        layer.msg(res.msg);
+                    }
+                },
+                error: function (res) {
+                    alert(res)
+                }
+            });
+            return false;
+        });
+
+        from.on('submit(formDemo2)',function (res) {
+            console.log(res.field);
+            $.ajax({
+                url: '/user/card_s',
+                type: 'post',
+                dataType: 'json',
+                data: 'userId='+res.field.id+'&o=1',
+                success: function (res) {
+                    if (res.state === 0){
+                        layer.msg(res.msg);
+                        var index = parent.layer.getFrameIndex(window.name);
+                        window.parent.location.reload();
+                        setTimeout(function(){parent.layer.close(index)}, 500);
+                    } else {
+                        layer.msg(res.msg);
+                    }
+                },
+                error: function (res) {
+                    alert(res)
+                }
+            });
+            return false;
+        });
+    });
+    var img = document.getElementById('img');
+    function bigger() {
+        img.style.width='500px';
+        img.style.height='400px';
+    }
+    function smaller() {
+        img.style.width='300px';
+        img.style.height='200px';
+    }
+    var img1 = document.getElementById('imgeer1');
+    function bigger1() {
+        img1.style.width='500px';
+        img1.style.height='400px';
+    }
+    function smaller1() {
+        img1.style.width='300px';
+        img1.style.height='200px';
+    }
+    var img2 = document.getElementById('imger2');
+    function bigger2() {
+        img2.style.width='500px';
+        img2.style.height='400px';
+    }
+    function smaller2() {
+        img2.style.width='300px';
+        img2.style.height='200px';
+    }
+
+    function child(obj) {
+        $("#id").val(obj.userId);
+        $("#userId").text(obj.userId);
+        $("#name").text(obj.idname);
+        $("#phone").text(obj.phone);
+        $("#IDCardNo").text(obj.idcardNo);
+        if (obj.idcardImg != null){
+            $("#imgeer1").attr('src',obj.idcardImg.card_A);
+            $("#imger2").attr('src',obj.idcardImg.card_B);
+            $("#img").attr('src',obj.idcardImg.card_C);
+        }
+
+    }
+</script>
+</body>
+<style type="text/css">
+    .form{
+        text-align: center;
+    }
+</style>
+</html>

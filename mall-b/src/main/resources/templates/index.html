@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh_cn" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>大锄-云算力后台管理</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <style>
+        .z-li{
+            float: right;
+        }
+    </style>
+</head>
+<body>
+<!--导航区-->
+<div>
+    <ul class="layui-nav layui-nav-tree layui-nav-side" lay-filter="nav" style="position: fixed!important; top: 60px!important; ">
+        <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+        <li class="layui-nav-item">
+            <a href="javascript:;">用户管理</a>
+        <dl class="layui-nav-child">
+            <dd><a>全部用户</a></dd>
+            <dd><a>增加用户</a></dd>
+        </dl>
+        </li>
+        <li class="layui-nav-item">
+            <a href="javascript:;">商品管理</a>
+        <dl class="layui-nav-child">
+            <dd><a>查看商品</a></dd>
+            <dd><a lay-id="addCommodity">新增商品</a></dd>
+        </dl>
+        </li>
+        <li class="layui-nav-item">
+            <a href="javascript:;">订单管理</a>
+        <dl class="layui-nav-child">
+            <dd><a>算力订单</a></dd>
+            <dd><a>维护订单</a></dd>
+            <dd><a>钱包订单</a></dd>
+        </dl>
+        </li>
+        <li class="layui-nav-item"><a href="javascript:;">支付管理</a></li>
+        <li class="layui-nav-item"><a href="javascript:;">支付信息</a></li>
+        <li class="layui-nav-item"><a href="javascript:;">资产管理</a></li>
+        <li class="layui-nav-item">
+            <a href="javascript:;">审核管理</a>
+        <dl class="layui-nav-child">
+            <dd><a>支付审核</a></dd>
+            <dd><a>提现审核</a></dd>
+            <dd><a>实名审核</a></dd>
+            <dd><a>打币！！</a></dd>
+        </dl>
+        </li>
+        <li class="layui-nav-item"><a href="javascript:;">提现管理</a></li>
+        <li class="layui-nav-item"><a href="javascript:;">推广管理</a></li>
+        <li class="layui-nav-item"><a href="javascript:;">新闻管理</a></li>
+    </ul>
+</div>
+<div>
+    <ul class="layui-nav" lay-filter="mode">
+        <li class="layui-nav-item z-li">
+            <a href="javascript:;" th:if="${user==null}">未登录</a>
+             <a href="javascript:;" th:if="${user.getName()} ne null" th:text="${user.getName()}"></a>
+             <a href="javascript:;" th:if="${user.getName()==null&&user.getEmail()==null}" th:text="${user.getPhone()}"></a>
+             <a href="javascript:;" th:if="${user.getName()==null&&user.getPhone()==null}" th:text="${user.getEmail()}"></a>
+             <a href="javascript:;" th:if="${user.getName()==null&&user.getPhone()!=null&&user.getPhone()!=null}" th:text="${user.getPhone()}"></a>
+        <dl class="layui-nav-child">
+            <dd><a href="/logout">退出登录</a></dd>
+        </dl>
+        </li>
+        <!--<li class="layui-nav-item z-li">< a href="">产品</ a></li>-->
+        <!--<li class="layui-nav-item z-li">< a href="">大数据</ a></li>-->
+        <!--<li class="layui-nav-item z-li">-->
+        <!--< a href="javascript:;">解决方案</ a>-->
+        <!--<dl class="layui-nav-child"> &lt;!&ndash; 二级菜单 &ndash;&gt;-->
+        <!--<dd>< a href="">移动模块</ a></dd>-->
+        <!--<dd>< a href="">后台模版</ a></dd>-->
+        <!--<dd>< a href="">电商平台</ a></dd>-->
+        <!--</dl>-->
+        <!--</li>-->
+        <li class="layui-nav-item" lay-unselect><a href="javascript:" style="font-size: 30px; padding: 0 45px" >大锄</a></li>
+    </ul>
+</div>
+<!--导航区-->
+
+<!--数据区-->
+<div id="data" style="position: absolute; top: 70px; left: 210px;">
+    <iframe id="indexIframe" width="100%" height="100%" src="/admin/user/all" scrolling="no">
+
+    </iframe>
+</div>
+
+<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="/layui/layui.all.js"></script>
+
+<script>
+    var element;
+    layui.use('layer', function(){
+        var layer = layui.layer;
+    });
+    layui.use('element', function(){
+        element = layui.element;
+
+        element.init();
+
+        element.on('nav(nav)', function(elem){
+            //console.log(elem);
+            // layer.msg(elem.text());
+            if (elem.text() === "全部用户"){
+                send("/admin/user/all");
+            }else if (elem.text() === "增加用户"){
+                send("/admin/user/add")
+            }else if (elem.text() === "查看商品"){
+                send("/admin/commodity/")
+            }else if (elem.text() === "新增商品"){
+                send("/admin/commodity/add")
+            }else if(elem.text() === "算力订单"){
+                send("/admin/order/")
+            }else if(elem.text() === "维护订单"){
+                send("/admin/maintain/")
+            }else if(elem.text() === "钱包订单"){
+                send("/admin/order/wallet")
+            }else if(elem.text() === "支付管理"){
+                send("/admin/pay/")
+            }else if(elem.text() === "资产管理"){
+                send("/admin/assets/")
+            }else if(elem.text() === "支付审核"){
+                send("/admin/pay/examine")
+            }else if(elem.text() === "提现审核"){
+                send("/admin/reflect/examine")
+            }else if(elem.text() === "实名审核"){
+                send("/admin/user/examine")
+            }else if(elem.text() === "提现管理"){
+                send("/admin/reflect/")
+            }else if(elem.text() === "支付信息"){
+                send("/admin/pay/bank")
+            }else if(elem.text() === "推广管理"){
+                layer.msg('暂未开放');
+            }else if(elem.text() === "新闻管理"){
+                layer.msg('暂未开放');
+            }else if(elem.text() === "打币！！"){
+                send("/admin/reflect/coin")
+            }
+        });
+    });
+
+    function send(zch){
+        $("#data iframe").attr("src", zch);
+    }
+
+    function tabChange(id){
+        element.tabChange('nav',id);
+        element.render('nav');
+    }
+
+    $(function () {
+        $("#data").css("height",window.innerHeight-80);
+        $("#data").css("width",window.innerWidth-230)
+    })
+</script>
+</body>
+</html>

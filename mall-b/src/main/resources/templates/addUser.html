@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh_cn" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>添加用户</title>
+    <link rel="stylesheet" href="//layui.hcwl520.com.cn/layui-v2.4.5/css/layui.css?v=201811010202" media="all">
+</head>
+<body>
+<div class="title2" id="head2" style="width: 700px;margin: 0 auto;">
+    <form class="layui-form layui-form-pane" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 200px">昵称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="name" placeholder="请输入" autocomplete="off" class="layui-input" style="width: 500px">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 200px">手机号</label>
+            <div class="layui-input-inline">
+                <input type="text" name="phone" lay-verify="phone" placeholder="请输入" autocomplete="off" class="layui-input" style="width: 500px">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 200px">邮箱</label>
+            <div class="layui-input-inline">
+                <input type="text" name="email" placeholder="请输入" autocomplete="off" class="layui-input" style="width: 500px">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 200px">密码</label>
+            <div class="layui-input-inline">
+                <input type="text" name="password" lay-verify="password" placeholder="请输入" autocomplete="off" class="layui-input" style="width: 500px">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 200px">身份证号</label>
+            <div class="layui-input-inline">
+                <input type="text" name="IDCardNo" placeholder="请输入" autocomplete="off" class="layui-input" style="width: 500px">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block">
+                <select name="userStart" lay-filter="aihao">
+                    <option value="2">未提交实名信息</option>
+                    <option value="1">审核中</option>
+                    <option value="0">已实名</option>
+                </select>
+            </div>
+        </div>
+    <div>
+        <button class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius" lay-submit lay-filter="userAdd" style="width: 610px">添_._._._._._._._._加</button>
+    </div>
+    </form>
+</div>
+<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="//layui.hcwl520.com.cn/layui-v2.4.5/layui.js?v=201811010202"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'layer'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit;
+
+
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
+
+        //监听提交
+        form.on('submit(userAdd)', function(data){
+            $.ajax({
+               url: "/user/user_admin_add",
+               type: "post",
+               dataType: "json",
+               data: data.field,
+               success: function (res) {
+                    if (res.state === 0){
+                        layer.alert(JSON.stringify(res.data),{
+                            title: res.msg,
+                            data: res.data
+                        })
+                    }else {
+                        layer.msg("失败");
+                    }
+               } ,
+               error: function (res) {
+                    alert(res);
+               }
+            });
+            return false;
+        });
+
+        form.verify({
+            password: [
+                /^[\S]{2,18}$/
+                ,'密码不能为空且大于18位'
+            ],
+            name:[
+                /^[\S][a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$/
+                ,'昵称不能为空或者包含特殊字符'
+            ]
+        })
+
+    });
+</script>
+</body>
+</html>

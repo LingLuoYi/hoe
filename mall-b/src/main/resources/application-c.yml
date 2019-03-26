@@ -1,0 +1,61 @@
+spring:
+  messages:
+    basename: static/i18n/messages
+  jpa:
+    database: mysql
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        temp:
+          use_jdbc_metadata_defaults: false
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+  mail:
+    host: smtp.exmail.qq.com
+    port: 465
+    username: mayi001@szhl888.com
+    password: MAyi2018
+    protocol: smtp
+    default-encoding: utf-8
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+  redis:
+    host: 38.21.243.149
+    port: 6379
+    password: linglouyi
+    database: 0
+    timeout: 200000ms
+    jedis:
+      pool:
+        max-idle: 8
+        max-wait: -1ms
+        max-active: 8
+        min-idle: 0
+
+
+c3p0:
+  jdbcUrl: jdbc:mysql://38.21.243.149:3306/db_hoe?useUnicode=true&characterEncoding=utf-8&useSSL=true
+  user: root
+#  password: qWeq14WQ
+  password: linglouyi
+  driverClass: com.mysql.jdbc.Driver
+  minPoolSize: 2
+  maxPoolSize: 10
+  maxIdleTime: 1800000
+  acquireIncrement: 1
+  maxStatements: 1000
+  initialPoolSize: 3
+  idleConnectionTestPeriod: 90
+  checkoutTimeout: 5000
+  acquireRetryAttempts: 30
+  acquireRetryDelay: 1000
+  breakAfterAcquireFailure: false
+  testConnectionOnCheckout: false
+

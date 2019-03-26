@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加支付信息</title>
+    <link rel="stylesheet" href="//layui.hcwl520.com.cn/layui-v2.4.5/css/layui.css?v=201811010202" media="all">
+</head>
+<body>
+
+<form class="layui-form layui-form-pane" action="">
+    <input type="text" id="id" value="" name="id" style="display: none">
+    <div class="layui-form-item">
+        <label class="layui-form-label">AppID</label>
+        <div class="layui-input-block">
+            <input type="text" id="appID" name="appID" autocomplete="off" placeholder="应用商提供的" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">AppPrivateKey</label>
+        <div class="layui-input-block">
+            <input type="text" id="appPrivateKey" name="appPrivateKey" autocomplete="off" placeholder="与公钥对应的密钥" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+    <label class="layui-form-label">Gateway</label>
+       <div class="layui-input-block">
+           <input type="text" id="gateway" name="gateway" autocomplete="off" placeholder="网关" class="layui-input">
+       </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">设置值支付方式</label>
+        <div class="layui-input-block">
+            <select name="payType" id="payType">
+                <option value="Alipay">支付宝</option>
+                <option value="WeChatPay">微信</option>
+                <option value="remit">转账</option>
+                <option value="bitRemit">比特币</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">Spare</label>
+        <div class="layui-input-block">
+            <input type="text" id="spare" name="spare" autocomplete="off" placeholder="公钥" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <button class="layui-btn" lay-submit lay-filter="demo2">添加</button>
+    </div>
+</form>
+
+<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="//layui.hcwl520.com.cn/layui-v2.4.5/layui.js?v=201811010202"></script>
+<script>
+    layui.use('form',function () {
+        var form = layui.form;
+
+        form.on('submit(demo2)',function (res) {
+            console.log(res.field);
+            $.ajax({
+                url: '/pay/add_bank',
+                type: 'POST',
+                dataType: 'json',
+                data: res.field,
+                success: function (res) {
+                    console.log(res.data);
+                    if (res.state === 0){
+                        layer.msg(res.msg);
+                        var index = parent.layer.getFrameIndex(window.name);
+                        window.parent.location.reload();
+                        setTimeout(function(){parent.layer.close(index)}, 500);
+                    } else {
+                        layer.msg(res.msg);
+                    }
+                },
+                error: function (res) {
+                    alert(res)
+                }
+            })
+        })
+    })
+
+    function child(res) {
+        if (res != null) {
+            $("#id").val(res[0].id);
+            $("#appID").val(res[0].appID);
+            $("#appPrivateKey").val(res[0].appPrivateKey);
+            $("#gateway").val(res[0].gateway);
+            $("#payType").val(res[0].payType);
+            $("#spare").val(res[0].spare);
+        }
+    }
+</script>
+</body>
+</html>

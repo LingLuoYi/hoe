@@ -1,0 +1,101 @@
+server:
+  port: 80
+  tomcat:
+    max-threads: 800
+    accept-count: 30000
+    min-spare-threads: 20
+    max-connections: 30000
+spring:
+  #  datasource:
+  #    driver-class-name: com.mysql.jdbc.Driver
+  #    url: jdbc:mysql://45.195.203.169:3306/cloud?useUnicode=true&characterEncoding=utf-8&useSSL=true&autoReconnect=true&failOverReadOnly=false
+  #    username: root
+  #    password: qWeq14WQ
+  messages:
+    basename: static/i18n/messages
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        temp:
+          use_jdbc_metadata_defaults: false
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+  mail:
+    host: smtp.exmail.qq.com
+    port: 465
+    username: bitcentre@btcjag.com
+    password: BGzYP99hmHqBMFd
+    protocol: smtp
+    default-encoding: utf-8
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+  redis:
+    host: ddns.kylinhash.com
+    port: 65520
+    password: linglouyi
+    database: 0
+    timeout: 200000ms
+    jedis:
+      pool:
+        max-idle: 8
+        max-wait: -1ms
+        max-active: 8
+        min-idle: 0
+
+  main:
+    allow-bean-definition-overriding: true
+
+  datasource:
+    url: jdbc:mysql://ddns.kylinhash.com:65521/db_hoe?useUnicode=true&characterEncoding=utf-8&useSSL=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 12
+      connection-timeout: 200000
+      idle-timeout: 3000000
+      max-lifetime: 1200000
+      auto-commit: true
+      pool-name: HoeHikariCP
+
+
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+
+#c3p0不好使
+#c3p0:
+#  jdbcUrl: jdbc:mysql://linglouyi.kylinhash.com:65521/db_hoe?useUnicode=true&characterEncoding=utf-8&useSSL=true
+#  user: root
+##  password: qWeq14WQ
+#  password: linglouyi
+#  driverClass: com.mysql.jdbc.Driver
+#  minPoolSize: 2
+#  maxPoolSize: 10
+#  maxIdleTime: 1800000
+#  acquireIncrement: 1
+#  maxStatements: 1000
+#  initialPoolSize: 3
+#  idleConnectionTestPeriod: 90
+#  checkoutTimeout: 5000
+#  acquireRetryAttempts: 30
+#  acquireRetryDelay: 1000
+#  breakAfterAcquireFailure: false
+#  testConnectionOnCheckout: false
+

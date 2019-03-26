@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全部用户</title>
+    <link rel="stylesheet" href="//layui.hcwl520.com.cn/layui-v2.4.5/css/layui.css?v=201811010202" media="all">
+</head>
+<body>
+
+<form class="layui-form" action="">
+    <input type="text" id="id" value="" name="id" style="display: none">
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户id</label>
+        <div class="layui-input-block">
+            <input type="text" id="userId" name="userId" required  lay-verify="required" placeholder="" autocomplete="off" disabled class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">昵称</label>
+        <div class="layui-input-block">
+            <input type="text" id="name" name="name" placeholder="" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">手机号</label>
+        <div class="layui-input-block">
+            <input type="text" id="phone" name="phone" placeholder="" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">邮箱</label>
+        <div class="layui-input-block">
+            <input type="text" id="email" name="email" placeholder="" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">头像</label>
+        <div class="layui-input-block">
+            <input type="text" id="imgUrl" name="imgUrl" placeholder="" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">身份证号</label>
+        <div class="layui-input-block">
+            <input type="text" id="IDCardNo" name="IDCardNo" placeholder="" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户状态</label>
+        <div class="layui-input-block">
+            <input type="text" id="userStart" name="userStart" placeholder="" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">拥有角色</label>
+            <div class="layui-input-block">
+                <input type="text" id="com.s.entity.Roles" name="com.s.entity.Roles" placeholder="" autocomplete="off" disabled class="layui-input" value="">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">授权</label>
+            <div class="layui-input-inline">
+                <input type="button" autocomplete="off" onclick="popup()" class="layui-btn layui-btn-normal" value="点击授权">
+                <!--<button class="layui-btn layui-btn-normal">授权</button>-->
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">钱包</label>
+        <div class="layui-input-block">
+            <input type="text" id="Wallet" placeholder="" autocomplete="off" disabled class="layui-input" value="暂不支持修改">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">收货地址</label>
+        <div class="layui-input-block">
+            <input type="text" placeholder="" autocomplete="off" disabled class="layui-input" value="暂不支持修改">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">累计收益</label>
+        <div class="layui-input-block">
+            <input type="text" id="profit" name="profit" placeholder="" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+        </div>
+    </div>
+</form>
+
+<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="//layui.hcwl520.com.cn/layui-v2.4.5/layui.js?v=201811010202"></script>
+<script>
+    layui.use('form',function () {
+        var from = layui.form ;
+
+        from.on('submit(formDemo)',function (res) {
+            console.log(res.field);
+            $.ajax({
+                url: '/user/user_admin_add',
+                type: 'post',
+                dataType: 'json',
+                data: res.field,
+                success: function (res) {
+                    console.log(res.data);
+                    if (res.state === 0){
+                        layer.msg(res.msg);
+                        var index = parent.layer.getFrameIndex(window.name);
+                        window.parent.location.reload();
+                        setTimeout(function(){parent.layer.close(index)}, 500);
+                    } else {
+                        layer.msg(res.msg);
+                    }
+                },
+                error: function (res) {
+                    alert(res)
+                }
+            });
+            return false;
+        })
+    });
+
+    function child(obj) {
+        $("#id").val(obj.id);
+        $("#userId").val(obj.userId);
+        $("#name").val(obj.name);
+        $("#phone").val(obj.phone);
+        $("#email").val(obj.email);
+        $("#imgUrl").val(obj.imgUrl);
+        $("#IDCardNo").val(obj.IDCardNo);
+        $("#userStart").val(obj.userStart);
+        $("#com.s.entity.Roles").val(obj.role);
+        $("#Wallet").val(obj.Wallet);
+        $("#address").val(obj.address);
+        $("#profit").val(obj.profit);
+    }
+    
+    function popup() {
+        layer.open({
+            type: 2,
+            area: ['400px', '250px'],
+            fixed: false, //不固定
+            maxmin: true,
+            content: '/admin/user/role',
+            success:function (layero,index) {
+                var iframe = window['layui-layer-iframe' + index];
+                iframe.child($("#userId").val())
+            }
+        });
+    }
+</script>
+</body>
+</html>

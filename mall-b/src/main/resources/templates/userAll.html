@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="UTF-8">
+    <title>全部用户</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <style type="text/css">
+        .demoTable{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="demoTable">
+    搜索ID：
+    <div class="layui-inline">
+        <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+    </div>
+    <button class="layui-btn" data-type="reload">搜索</button>
+</div>
+
+<table class="layui-hide" id="LAY_table_user" lay-filter="user" width="100%"></table>
+
+
+<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="/layui/layui.all.js"></script>
+<script src="/layer/layer.js"></script>
+<!--头像模板-->
+<script type="text/html" id="imgUrl">
+     {{# if(d.imgUrl != null){ }}
+     <img src="{{d.imgUrl}}"/>
+     {{# }  }}
+</script>
+<!--角色模板-->
+<script type="text/html" id="com.s.entity.Roles">
+    {{#  if(d.com.s.entity.Roles != null){ }}
+    {{#  layui.each(d.com.s.entity.Roles, function(index, item){ }}
+    <span>item</span>
+    {{#  }); }}
+    {{# } }}
+</script>
+<!--钱包模板-->
+<script type="text/html" id="Wallet">
+    {{# if(d.Wallet != null){ }}
+    <span>{{ d.value }}</span>
+    {{#  } }}
+</script>
+<!--地址模板-->
+<script type="text/html" id="address">
+<ul>
+    {{#  layui.each(d.address, function(index, item){ }}
+    <li>{{ item.address }}</li>
+    {{#  }); }}
+</ul>
+</script>
+<!--工具栏模板-->
+<script type="text/html" id="toolbar">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+    </div>
+</script>
+<script src="/js/user.js"></script>
+</body>
+</html>

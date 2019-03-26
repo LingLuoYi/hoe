@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>新增商品</title>
+    <link rel="stylesheet" href="//layui.hcwl520.com.cn/layui-v2.4.5/css/layui.css?v=201811010202" media="all">
+    <style type="text/css">
+        #head{
+            width: 100%;
+            height: 150px;
+            text-align: center;
+            position: relative;
+        }
+        .title {
+            font-family: "宋体";
+            color: #0C0C0C;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);  /* 使用css3的transform来实现 */
+            font-size: 40px;
+            height: 40px;
+            width: 30%;
+        }
+    </style>
+</head>
+<br>
+<div class="title2" id="head2" style="width: 700px;margin: 0 auto;">
+        <form class="layui-form layui-form-pane" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 200px">商品名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="commodityName" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" style="width: 500px">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 200px">商品现库存</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="commodityStock" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" style="width: 500px">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 200px">商品总库存</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="commodityInitialStock" placeholder="请输入" autocomplete="off" class="layui-input" style="width: 500px">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 200px">起购数量</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="commodityPresent" lay-verify="required" placeholder="购买下限 0，不限制" autocomplete="off" class="layui-input" style="width: 500px">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 200px">购买上限</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="commodityTopLimit" lay-verify="required" placeholder="购买上限 0，不限制" autocomplete="off" class="layui-input" style="width: 500px">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 200px">购买次数</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="commodityLimit" lay-verify="required" placeholder="购买限制 0，不限制" autocomplete="off" class="layui-input" style="width: 500px">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 200px">商品单价</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="commodityMoney" lay-verify="required" placeholder="格式：9999.99" autocomplete="off" class="layui-input" style="width: 500px">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">商品类型</label>
+                <div class="layui-input-block">
+                    <select name="commodityType" lay-filter="aihao">
+                        <option value="BTC">BTC算力套餐</option>
+                        <option value="1">实物商品</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 200px">商品单位功耗</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="commodityWatt" placeholder="算力商品填写，格式 105.0" autocomplete="off" class="layui-input" style="width: 500px">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 200px">商品单位电费</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="commodityPowerRate" placeholder="算力商品填写， 格式 0.40" autocomplete="off" class="layui-input" style="width: 500px">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 200px">固化收益率</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="commodityCuring" lay-verify="required" placeholder="固化商品填写， 格式 0.40，普通套餐-1" autocomplete="off" class="layui-input" style="width: 500px">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 200px">即时/定时交割</label>
+                <div class="layui-input-inline">
+                    <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switchTest" lay-text="即时|定时">
+                </div>
+            </div>
+            <div class="layui-form-item" id="commodityDiv">
+                <label class="layui-form-label" style="width: 200px">交割时间</label>
+                <div class="layui-input-block">
+                    <input type="text" name="commodityTime" id="commodityTime" placeholder="实物商品是发货时间、算力商品是交割时间" autocomplete="off" class="layui-input" style="width: 500px" value="0">
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <label class="layui-form-label" style="width: 200px">商品期限</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="commodityTerm" placeholder="请输入一个正整数" autocomplete="off" class="layui-input" style="width: 500px">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">状态</label>
+                <div class="layui-input-block">
+                    <select id="commodityState" name="commodityState" lay-filter="aihao">
+                        <option value="0">上架</option>
+                        <option value="1">预热</option>
+                        <option value="2">下架</option>
+                        <option value="3">删除</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text" style="width: 700px">
+                <label class="layui-form-label">商品描述</label>
+                <div class="layui-input-block">
+                    <textarea name="commodityDescribe" placeholder="请输入内容" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div>
+                <button class="layui-btn layui-btn-lg layui-btn-primary layui-btn-radius" lay-submit lay-filter="commodity" style="width: 610px">添_._._._._._._._._加</button>
+            </div>
+        </form>
+</div>
+<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="//layui.hcwl520.com.cn/layui-v2.4.5/layui.js?v=201811010202"></script>
+<script>
+    layui.use(['form', 'laydate', 'layer'], function(){
+        var form = layui.form
+            ,laydate = layui.laydate;
+
+        //监听提交
+        form.on('submit(commodity)', function(data){
+            console.log(data.field);
+            $.ajax({
+                url: "/commodity/commodity_add",
+                type: "post",
+                dataType: "json",
+                data: data.field,
+                success: function (res) {
+                    if (res.state === 0){
+                        layer.alert(JSON.stringify(res.data),{
+                            title: res.msg,
+                            data: res.data
+                        })
+                    }else {
+                        layer.msg(res.msg)
+                    }
+                },
+                error: function (res) {
+                    alert(res);
+                }
+            });
+            return false;
+        });
+
+
+        form.on('switch', function(data){
+            if (data.elem.checked) {
+                $("#commodityDiv").hide();
+                form.on('submit(commodity)', function(data){
+                    var data1 = data.field;
+                    data1.commodityTime = '0';
+                    $.ajax({
+                        url: "/commodity/commodity_add",
+                        type: "post",
+                        dataType: "json",
+                        data: data1,
+                        success: function (res) {
+                            if (res.state === 0){
+                                layer.alert(JSON.stringify(res.data),{
+                                    title: res.msg,
+                                    data: res.data
+                                })
+                            }else {
+                                layer.msg(res.msg)
+                            }
+                        },
+                        error: function (res) {
+                            alert(res);
+                        }
+                    });
+                    return false;
+                });
+            }else {
+                $("#commodityDiv").show();
+                laydate.render({
+                    elem: '#commodityTime' //指定元素
+                    ,min: new Date().toLocaleDateString()
+                });
+                form.on('submit(commodity)', function(data){
+                    $.ajax({
+                        url: "/commodity/commodity_add",
+                        type: "post",
+                        dataType: "json",
+                        data: data.field,
+                        success: function (res) {
+                            if (res.state === 0){
+                                layer.alert(JSON.stringify(res.data),{
+                                    title: res.msg,
+                                    data: res.data
+                                })
+                            }else {
+                                layer.msg(res.msg)
+                            }
+                        },
+                        error: function (res) {
+                            alert(res);
+                        }
+                    });
+                    return false;
+                });
+            }
+        });
+        $("#commodityDiv").hide();
+
+    });
+</script>
+</body>
+</html>

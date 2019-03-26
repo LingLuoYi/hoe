@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="UTF-8">
+    <title>授权</title>
+    <link rel="stylesheet" href="//layui.hcwl520.com.cn/layui-v2.4.5/css/layui.css?v=201811010202" media="all">
+</head>
+<body>
+<form class="layui-form layui-form-pane" action="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户Id</label>
+        <div class="layui-input-inline">
+            <input type="text" id="userId" name="userId" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">角色</label>
+        <div class="layui-input-block">
+            <select name="role" lay-filter="aihao">
+                <option value="user">普通用户</option>
+                <option value="finance">财务管理</option>
+                <option value="cashier">出纳管理</option>
+                <option value="storehouse">商品管理</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <button class="layui-btn" lay-submit="" lay-filter="formDemo">授权</button>
+    </div>
+</form>
+<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="//layui.hcwl520.com.cn/layui-v2.4.5/layui.js?v=201811010202"></script>
+<script>
+    layui.use('form',function () {
+        var form = layui.form;
+
+        form.on('submit(formDemo)',function (res) {
+            console.log(res.field);
+            $.ajax({
+                url: '/user/roles_update',
+                type: 'post',
+                dataType: 'json',
+                data: res.field,
+                success: function (res) {
+                    console.log(res.data);
+                    if (res.state === 0){
+                        layer.msg(res.msg);
+                        var index = parent.layer.getFrameIndex(window.name);
+                        window.parent.location.reload();
+                        setTimeout(function(){parent.layer.close(index)}, 500);
+                    } else {
+                        layer.msg(res.msg);
+                    }
+                },
+                error: function (res) {
+                    alert(res);
+                }
+            });
+            return false;
+        })
+    })
+
+    function child(obj) {
+        $("#userId").val(obj);
+    }
+</script>
+</body>
+</html>

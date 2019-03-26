@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>资产管理弹出层</title>
+    <link rel="stylesheet" href="//layui.hcwl520.com.cn/layui-v2.4.5/css/layui.css?v=201811010202" media="all">
+</head>
+<body>
+
+<form class="layui-form" action="">
+    <input type="text" id="id" value="" name="id" style="display: none">
+    <div class="layui-form-item">
+        <label class="layui-form-label">支付/资产ID</label>
+        <div class="layui-input-block">
+            <input type="text" id="assetsPayId" name="assetsPayId" lay-verify="required" placeholder="请输入" autocomplete="off" disabled class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">所有者ID</label>
+        <div class="layui-input-block">
+            <input type="text" id="assetsUserId" name="assetsUserId" lay-verify="required" placeholder="请输入" autocomplete="off" disabled class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">资产名称</label>
+        <div class="layui-input-block">
+            <input type="text" id="assetsName" name="assetsName" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">资产类型</label>
+        <div class="layui-input-block">
+            <input type="text" id="assetsType" name="assetsType" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">拥有数量</label>
+        <div class="layui-input-block">
+            <input type="text" id="assetsNum" name="assetsNum" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">资产周期</label>
+        <div class="layui-input-block">
+            <input type="text" id="assetsTerm" name="assetsTerm" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">维护费缴纳方式</label>
+        <div class="layui-input-block">
+            <input type="text" id="maintainPayType" name="maintainPayType" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">已支付维护费天数</label>
+        <div class="layui-input-block">
+            <input type="text" id="maintainDay" name="maintainDay" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">收益扣除费用</label>
+        <div class="layui-input-block">
+            <input type="text" id="deductions" name="deductions" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">功耗</label>
+        <div class="layui-input-block">
+            <input type="text" id="watt" name="watt" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">电费</label>
+        <div class="layui-input-block">
+            <input type="text" id="powerRate" name="powerRate" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">资产浮动收益</label>
+        <div class="layui-input-block">
+            <input type="text" id="assetsProfit" name="assetsProfit" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">资产累计收益</label>
+        <div class="layui-input-block">
+            <input type="text" id="assetsAllProfit" name="assetsAllProfit" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">冻结收益</label>
+        <div class="layui-input-block">
+            <input type="text" id="assetsFrozenProfit" name="assetsFrozenProfit" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">已提收益</label>
+        <div class="layui-input-block">
+            <input type="text" id="assetsAvailableProfit" name="assetsAvailableProfit" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">资产开始时间</label>
+        <div class="layui-input-block">
+            <input type="text" id="assetsTime" name="assetsTime" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">资产持有天数</label>
+        <div class="layui-input-block">
+            <input type="text" id="assetsDay" name="assetsDay" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">资产状态</label>
+        <div class="layui-input-block">
+            <input type="text" id="assetsState" name="assetsState" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">资产联系人</label>
+        <div class="layui-input-block">
+            <input type="text" id="assetsPhone" name="assetsPhone" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">资产备注</label>
+        <div class="layui-input-block">
+            <input type="text" id="remark" name="remark" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">修改</button>
+        </div>
+    </div>
+</form>
+
+<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="//layui.hcwl520.com.cn/layui-v2.4.5/layui.js?v=201811010202"></script>
+<script>
+    layui.use('form',function () {
+        var from = layui.form ;
+
+        from.on('submit(formDemo)',function (res) {
+            console.log(res.field);
+            $.ajax({
+                url: '/assets/assets_admin_update',
+                type: 'post',
+                dataType: 'json',
+                data: res.field,
+                success: function (res) {
+                    console.log(res.data);
+                    if (res.state === 0){
+                        layer.msg(res.msg);
+                        var index = parent.layer.getFrameIndex(window.name);
+                        window.parent.location.reload();
+                        setTimeout(function(){parent.layer.close(index)}, 500);
+                    } else {
+                        layer.msg(res.msg);
+                    }
+                },
+                error: function (res) {
+                    alert(res)
+                }
+            });
+            return false;
+        })
+    });
+
+    function child(obj) {
+        $("#id").val(obj.id);
+        $("#assetsPayId").val(obj.assetsPayId);
+        $("#assetsUserId").val(obj.assetsUserId);
+        $("#assetsName").val(obj.assetsName);
+        $("#assetsType").val(obj.assetsType);
+        $("#assetsNum").val(obj.assetsNum);
+        $("#assetsTerm").val(obj.assetsTerm);
+        $("#maintainPayType").val(obj.maintainPayType);
+        $("#maintainDay").val(obj.maintainDay);
+        $("#deductions").val(obj.deductions);
+        $("#watt").val(obj.watt);
+        $("#powerRate").val(obj.powerRate);
+        $("#assetsProfit").val(obj.assetsProfit);
+        $("#assetsAllProfit").val(obj.assetsAllProfit);
+        $("#assetsFrozenProfit").val(obj.assetsFrozenProfit);
+        $("#assetsAvailableProfit").val(obj.assetsAvailableProfit);
+        $("#assetsTime").val(obj.assetsTime);
+        $("#assetsDay").val(obj.assetsDay);
+        $("#assetsState").val(obj.assetsState);
+        $("#assetsPhone").val(obj.assetsPhone);
+        $("#remark").val(obj.remark);
+    }
+</script>
+</body>
+</html>

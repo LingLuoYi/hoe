@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>维护订单弹出层</title>
+    <link rel="stylesheet" href="//layui.hcwl520.com.cn/layui-v2.4.5/css/layui.css?v=201811010202" media="all">
+</head>
+<body>
+
+<form class="layui-form" action="">
+    <input type="text" id="id" value="" name="id" style="display: none">
+    <div class="layui-form-item">
+        <label class="layui-form-label">订单ID</label>
+        <div class="layui-input-block">
+            <input type="text" id="maintainId" name="maintainId"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户ID</label>
+        <div class="layui-input-block">
+            <input type="text" id="userId" name="userId" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品ID</label>
+        <div class="layui-input-block">
+            <input type="text" id="commodityId" name="commodityId" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">资产ID</label>
+        <div class="layui-input-block">
+            <input type="text" id="assetsId" name="assetsId" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">总金额</label>
+        <div class="layui-input-block">
+            <input type="text" id="money" name="money" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">缴纳天数</label>
+        <div class="layui-input-block">
+            <input type="text" id="term" name="term"  lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">下单时间</label>
+        <div class="layui-input-block">
+            <input type="text" id="time" name="time" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">状态</label>
+        <div class="layui-input-block">
+            <input type="text" id="state" name="state" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">修改</button>
+        </div>
+    </div>
+</form>
+
+<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="//layui.hcwl520.com.cn/layui-v2.4.5/layui.js?v=201811010202"></script>
+<script>
+    layui.use('form',function () {
+        var from = layui.form ;
+
+        from.on('submit(formDemo)',function (res) {
+            console.log(res.field);
+            $.ajax({
+                url: '/maintain/maintain_admin_update',
+                type: 'post',
+                dataType: 'json',
+                data: res.field,
+                success: function (res) {
+                    console.log(res.data);
+                    if (res.state === 0){
+                        layer.msg(res.msg);
+                        var index = parent.layer.getFrameIndex(window.name);
+                        window.parent.location.reload();
+                        setTimeout(function(){parent.layer.close(index)}, 500);
+                    } else {
+                        layer.msg(res.msg);
+                    }
+                },
+                error: function (res) {
+                    alert(res);
+                }
+            })
+            return false;
+        })
+    });
+
+    function child(obj) {
+        $("#id").val(obj.id);
+        $("#maintainId").val(obj.maintainId);
+        $("#userId").val(obj.userId);
+        $("#commodityId").val(obj.commodityId);
+        $("#assetsId").val(obj.assetsId);
+        $("#money").val(obj.money);
+        $("#term").val(obj.term);
+        $("#time").val(obj.time);
+        $("#state").val(obj.state);
+    }
+</script>
+</body>
+</html>

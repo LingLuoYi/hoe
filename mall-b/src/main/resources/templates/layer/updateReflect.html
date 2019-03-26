@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="UTF-8">
+    <title>提现管理弹出层+提现审核</title>
+    <link rel="stylesheet" href="//layui.hcwl520.com.cn/layui-v2.4.5/css/layui.css?v=201811010202" media="all">
+</head>
+<body>
+
+<form class="layui-form" action="">
+    <input type="text" id="id" value="" name="id" style="display: none">
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户ID</label>
+        <div class="layui-input-block">
+            <input type="text" id="userId" name="userId" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">资产ID</label>
+        <div class="layui-input-block">
+            <input type="text" id="assetsId" name="assetsId" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">提现人名</label>
+        <div class="layui-input-block">
+            <input type="text" id="name" name="name" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">手机号</label>
+        <div class="layui-input-block">
+            <input type="text" id="phone" name="phone" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">邮箱</label>
+        <div class="layui-input-block">
+            <input type="text" id="email" name="email" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">身份证号码</label>
+        <div class="layui-input-block">
+            <input type="text" id="IDCard" name="IDCard" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">资产类型</label>
+        <div class="layui-input-block">
+            <input type="text" id="assetsType" name="assetsType"  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">提现数量</label>
+        <div class="layui-input-block">
+            <input type="text" id="num" name="num" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">提现到的钱包</label>
+        <div class="layui-input-block">
+            <input type="text" id="wallet" name="wallet" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">状态</label>
+        <div class="layui-input-block">
+            <input type="text" id="state" name="state" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-block">
+            <input type="text" id="remarks" name="remarks" placeholder="请输入标题" autocomplete="off" class="layui-input" value="'+data.address+'">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">提交时间</label>
+        <div class="layui-input-block">
+            <input type="text" id="submitTime" name="submitTime" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">审核人ID</label>
+        <div class="layui-input-block">
+            <input type="text" id="examineUserId" name="examineUserId" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">审核联系方式</label>
+        <div class="layui-input-block">
+            <input type="text" id="examinePhone" name="examinePhone" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">审核时间</label>
+        <div class="layui-input-block">
+            <input type="text" id="examineTime" name="examineTime" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">转账hash</label>
+        <div class="layui-input-block">
+            <input type="text" id="hash" name="hash" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">实际转账数量</label>
+        <div class="layui-input-block">
+            <input type="text" id="actualNum" name="actualNum" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">转账手续费</label>
+        <div class="layui-input-block">
+            <input type="text" id="brokerage" name="brokerage" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">转账人ID</label>
+        <div class="layui-input-block">
+            <input type="text" id="TransferUserId" name="TransferUserId" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">转账时间</label>
+        <div class="layui-input-block">
+            <input type="text" id="completeTime" name="completeTime" lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+        </div>
+    </div>
+</form>
+
+<script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script src="//layui.hcwl520.com.cn/layui-v2.4.5/layui.js?v=201811010202"></script>
+<script>
+    layui.use('form',function () {
+        var from = layui.form ;
+
+        from.on('submit(formDemo)',function (res) {
+            console.log(res.field);
+            $.ajax({
+               url: '/reflect/reflect_admin_update',
+               type: "post",
+               dataType: "json",
+               data: res.field,
+               success: function (res) {
+                   console.log(res.data);
+                   if (res.state === 0){
+                       layer.msg(res.msg);
+                       var index = parent.layer.getFrameIndex(window.name);
+                       window.parent.location.reload();
+                       setTimeout(function(){parent.layer.close(index)}, 500);
+                   } else {
+                       layer.msg(res.msg);
+                   }
+               },
+                error: function (res) {
+                    alert(res)
+                }
+            });
+            return false;
+        })
+    });
+
+    function child(obj) {
+        $("#id").val(obj.id);
+        $("#userId").val(obj.userId);
+        $("#assetsId").val(obj.assetsId);
+        $("#name").val(obj.name);
+        $("#phone").val(obj.phone);
+        $("#email").val(obj.email);
+        $("#IDCard").val(obj.idcard);
+        $("#assetsType").val(obj.assetsType);
+        $("#num").val(obj.num);
+        $("#wallet").val(obj.wallet);
+        $("#state").val(obj.state);
+        $("#remarks").val(obj.remarks);
+        $("#submitTime").val(obj.submitTime);
+        $("#examineUserId").val(obj.examineUserId);
+        $("#examinePhone").val(obj.examinePhone);
+        $("#examineTime").val(obj.examineTime);
+        $("#hash").val(obj.hash);
+        $("#actualNum").val(obj.actualNum);
+        $("#brokerage").val(obj.brokerage);
+        $("#TransferUserId").val(obj.transferUserId);
+        $("#completeTime").val(obj.completeTime);
+    }
+</script>
+</body>
+</html>
